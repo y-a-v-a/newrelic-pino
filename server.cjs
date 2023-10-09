@@ -116,6 +116,7 @@ app
     createServer(async (req, res) => {
       const requestId = Math.random().toString(16).slice(2);
       const reqStart = Date.now();
+      req.newrelic = newrelic;
 
       res.on('finish', () => {
         let logFunction = 'debug';
@@ -132,6 +133,9 @@ app
           throw new Error('No URL to process');
         }
         const parsedUrl = parse(req.url, true);
+
+        newrelic.setTransactionName(parsedUrl.pathname || '/*');
+
         await handle(req, res, parsedUrl);
       } catch (err) {
         logger.error('Error occurred handling', req.url, err);
