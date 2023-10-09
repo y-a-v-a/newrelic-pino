@@ -1,0 +1,3 @@
+node_modules
+.next
+newrelic_agent.log
