@@ -8,7 +8,7 @@ const http = require('http');
 const url = require('url');
 const parse = url.parse;
 const createServer = http.createServer;
-const pino = require('pino');
+// const pino = require('pino');
 
 const next = require('next');
 const nextBuiltInLogger = require('next/dist/build/output/log');
@@ -19,16 +19,17 @@ const CWD = __dirname;
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const logger = pino({
-  name: 'gstar-storefront-logger',
-  level: 'debug',
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      translateTime: 'yyyy-mm-dd HH:MM:ss.l o',
-    },
-  },
-});
+// const logger = pino({
+//   name: 'gstar-storefront-logger',
+//   level: 'debug',
+//   transport: {
+//     target: 'pino-pretty',
+//     options: {
+//       translateTime: 'yyyy-mm-dd HH:MM:ss.l o',
+//     },
+//   },
+// });
+const logger = console;
 
 function flattenData(value) {
   if (typeof value === 'object' && value !== null) {
